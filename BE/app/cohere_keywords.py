@@ -7,10 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()
 print("api")
 
-# 🔑 Replace with your actual Cohere API key
 COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 
-# Initialize async client
 co = cohere.AsyncClient(COHERE_API_KEY)
 print("api")
 
@@ -64,26 +62,14 @@ Return ONLY valid JSON in this format:
 
 
         try:
-            # Parse JSON response
+          
            data = json.loads(raw_text)
            all_keywords.extend(data.get("keywords", []))
 
         except Exception:
-            # fallback if parsing fails
             all_keywords.append({"keyword": seed, "volume": 1000})
     
     return all_keywords
 
 
-# 🔍 Test the module directly
-# if __name__ == "__main__":
-#     async def main():
-#         seeds = ["flipkart", "online shopping", "seo"]  # example seeds
-#         results = await cohere_keyword_fallback(seeds, n=5)
 
-#         print("\n✅ Cohere Keyword Ideas:")
-#         # for r in results:
-#             # print(f"{r['text']} (volume: {r['avg_monthly_searches']})")
-#         print("results",results)
-
-#     asyncio.run(main())

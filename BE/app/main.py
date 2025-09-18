@@ -20,7 +20,7 @@ import random
 
 app = FastAPI(title="SEM Planner Backend", version="1.0.0")
 
-# Add CORS middleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "https://keywordplanner1.vercel.app/", "*"],
@@ -62,46 +62,6 @@ async def generate_keywords(request: KeywordRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# debug run if invoked directly (optional)
-
-# def _estimate_search_volume( keyword: str) -> int:
-#     """Generate realistic search volume estimates"""
-#     base_volumes = {
-#         'brand': 15000,  # Nike, Adidas
-#         'product': 8000,  # shoes, clothing
-#         'location': 5000,  # Delhi, Mumbai
-#         'modifier': 3000,  # best, tips, guide
-#         'generic': 2000  # default
-#     }
-
-#     keyword_lower = keyword.lower()
-
-#     # Brand keywords
-#     if any(brand in keyword_lower for brand in ['nike', 'adidas']):
-#         base = base_volumes['brand']
-#     # Product keywords
-#     elif any(product in keyword_lower for product in ['shoes', 'clothing', 'sports', 'sneakers']):
-#         base = base_volumes['product']
-#     # Location keywords
-#     elif any(location in keyword_lower for location in ['delhi', 'mumbai']):
-#         base = base_volumes['location']
-#     # Modifier keywords
-#     elif any(modifier in keyword_lower for modifier in ['best', 'tips', 'guide']):
-#         base = base_volumes['modifier']
-#     else:
-#         base = base_volumes['generic']
-
-#     # Add some variation
-#     multiplier = random.uniform(0.3, 1.5)
-#     volume = int(base * multiplier)
-
-#     # Round to nice numbers
-#     if volume > 10000:
-#         return round(volume, -3)  # Round to nearest 1000
-#     elif volume > 1000:
-#         return round(volume, -2)  # Round to nearest 100
-#     else:
-#         return round(volume, -1)  # Round to nearest 10
 
 if __name__ == "__main__":
     import uvicorn

@@ -32,16 +32,16 @@ class CohereClient:
     Generate 15-20 high-value marketing keywords."""
 
             response = client.v2.chat(
-                model='command-r-08-2024',  # Using available model
+                model='command-r-08-2024', 
                 messages=[
                     {"role": "system", "content": system_message},
                     {"role": "user", "content": prompt}
                 ],
                 max_tokens=300,
-                temperature=0.5,  # Lower temperature for more consistent format
+                temperature=0.5, 
             )
             print("BAJDASJHD",response )
-            # Handle different content types in the response
+            
             content_text = ""
             for content_item in response.message.content:
                 if hasattr(content_item, 'text') and content_item.text:
@@ -49,16 +49,11 @@ class CohereClient:
                     break
 
             if content_text:
-                # Remove any potential formatting artifacts
+                
                 content_text = content_text.replace('\n', ' ').replace('\r', ' ')
-
-                # Split by comma and clean up
                 keywords = [keyword.strip() for keyword in content_text.split(",")]
-
-                # Filter out empty strings and ensure valid keywords
                 keywords = [kw for kw in keywords if kw and len(kw.strip()) > 1 and not kw.startswith('-')]
 
-                # Limit to reasonable number
                 return keywords[:20]
 
             return []
@@ -67,33 +62,4 @@ class CohereClient:
             print(f"Error generating keywords: {e}")
             return []
 
-    # async def generate_keywords(self, prompt: str) -> List[str]:
-    #     try:
-    #         client = self._get_client()
-    #
-    #         system_message = "You are a digital marketing keyword expert. Generate a list of relevant keywords based on the provided information. Return only the keywords as a comma-separated list, nothing else."
-    #
-    #         full_prompt = f"{system_message}\n\n{prompt}"
-    #
-    #         response = client.v2.chat(
-    #             model='command-r-08-2024',  # Using available model
-    #             messages=[
-    #                 {"role": "system", "content": system_message},
-    #                 {"role": "user", "content": prompt}
-    #             ],
-    #             max_tokens=300,
-    #             temperature=0.5,
-    #         )
-    #         print("HUADAWDA",response)
-    #         content = response.message.content[0].text.strip()
-    #         if content:
-    #             keywords = [keyword.strip() for keyword in content.split(",")]
-    #             # Clean up keywords - remove empty strings and extra whitespace
-    #             keywords = [kw for kw in keywords if kw and len(kw.strip()) > 0]
-    #             return keywords
-    #         return []
-    #     except Exception as e:
-    #         print(f"Error generating keywords: {e}")
-    #         return []
-
-
+    
