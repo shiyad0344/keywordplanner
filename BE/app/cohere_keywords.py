@@ -11,7 +11,7 @@ print("api")
 COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 
 # Initialize async client
-
+co = cohere.AsyncClient(COHERE_API_KEY)
 print("api")
 
 
@@ -71,7 +71,7 @@ Return ONLY valid JSON in this format:
         except Exception:
             # fallback if parsing fails
             all_keywords.append({"keyword": seed, "volume": 1000})
-    await co.close() 
+    
     return all_keywords
 
 
