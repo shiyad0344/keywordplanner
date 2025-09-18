@@ -52,29 +52,7 @@ async def generate_keywords(request: KeywordRequest):
     try:
         test_customer_id = "1282841519"
         ideas1 =await keyword_pipeline(request.brand_url, customer_id=test_customer_id, n_seed_keywords=5)
-        # ideas2 = await keyword_pipeline(request.brand_competitor_url, customer_id=test_customer_id, n_seed_keywords=5)
-        # cohere_client = CohereClient()
-        # prompt = f"""
-        #        Generate relevant keywords for a digital marketing campaign with the following details:
-        #        - Brand URL (ours): {request.brand_url}
-        #        - Competitor URL: {request.brand_competitor_url}
-        #        - Service Locations: {', '.join(request.service_location)}
-        #        - Shopping Ad Budget: ${request.shopping_ad_budget}
-        #        - Search Ad Budget: ${request.search_ad_budget}
-        #        - Performance Max Ad Budget: ${request.pmax_ad_budget}
-        #        - Ideas for brand URL (which we get via scraping): {ideas1}
-        #        - Ideas for competitor URL (which we get via scraping): {ideas2}
-
-        #        Please provide a list of high-value, relevant keywords for the campaign in the specified location for our brand.
-        #        """
-
-        # keywords = await cohere_client.generate_keywords(prompt)
-        # keywords_dict = []
-        # for keyword_text in keywords:
-        #     keywords_dict.append({
-        #         "text": keyword_text,
-        #         "avg_monthly_searches": _estimate_search_volume(keyword_text)
-        #     })
+   
         print("ideas1",ideas1)
         return KeywordResponse(
             success=True,
