@@ -85,7 +85,7 @@ function App() {
 
     try {
       const response = await axios.post<KeywordResponse>(
-          'http://localhost:8000/api/keyword-list',
+          'https://keywordplanner-back.vercel.app/api/keyword-list',
           formData
       )
       if (response.data.success) {
